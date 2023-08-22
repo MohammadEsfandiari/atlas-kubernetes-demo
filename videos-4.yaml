@@ -4,15 +4,22 @@ kind: AtlasSchema
 metadata:
   name: silly-demo-videos
 spec:
-  urlFrom:
-    secretKeyRef:
-      key: url
-      name: silly-demo-db
+  credentials:
+    scheme: postgres
+    host: silly-demo-rw.silly-demo
+    port: 5432
+    user: app
+    passwordFrom:
+      secretKeyRef:
+        key: password
+        name: silly-demo-app
+    database: app
+    parameters:
+      sslmode: disable
   schema:
     sql: |
       create table videos (
         id varchar(50) not null,
-        title varchar(255) not null,
         description text,
         primary key (id)
       );
@@ -26,4 +33,7 @@ spec:
   policy:
     lint:
       destructive:
-        error: true
+        error: false
+    # diff:
+    #   skip:
+    #     drop_column: true
