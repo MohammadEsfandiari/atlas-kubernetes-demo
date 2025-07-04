@@ -1,0 +1,13 @@
+---
+- name: Test Kubernetes Connection
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Get pod list
+      kubernetes.core.k8s_info:
+        kind: Pod
+      register: result
+
+    - debug:
+        var: result.resources
