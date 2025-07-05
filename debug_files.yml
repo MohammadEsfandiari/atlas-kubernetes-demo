@@ -1,0 +1,14 @@
+---
+- name: List Project Files
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Show files in the current directory
+      ansible.builtin.command: ls -la
+      register: project_files
+
+    - name: Display file list
+      ansible.builtin.debug:
+        var: project_files.stdout_lines
