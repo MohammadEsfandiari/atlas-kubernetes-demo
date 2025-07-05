@@ -1,4 +1,4 @@
 plugin: kubernetes.core.k8s
-api_key: "{{ lookup('env', 'K8S_AUTH_API_KEY') }}"
-host: https://<K8S_API_SERVER>
+api_key: "{{ lookup('env', 'K8S_API_TOKEN') }}"
+host: https://192.168.216.138:6443
 verify_ssl: false
